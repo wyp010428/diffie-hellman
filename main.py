@@ -12,6 +12,7 @@ def isPrime(p):
             return 0
     return 1
 
+
 # 获取P
 while(True):
     P = int(input("请输入P值："))
@@ -34,4 +35,31 @@ while True:
     G = int(input("请输入选择的G："))
     if G in g:
         break
-    print("所选择的G不在可用列表中，请重新选择：")
+    print("所选择的G不在可用列表中，请重新选择")
+print(f"G = {G}, P = {P}")
+
+# 获得A、B
+while True:
+    A = int(input("请输入你的A："))
+    if A < P and A > 1:
+        break
+    print("输入不合法，请重新输入")
+while True:
+    B = int(input("请输入你的B："))
+    if B < P and B > 1:
+        break
+    print("输入不合法，请重新输入")
+
+# 计算AA，BB
+AA = G ** A % P
+BB = G ** B % P
+print(f"计算得AA = {AA}，BB = {BB}")
+
+# 计算共享密钥
+key1 = BB ** A % P
+key2 = AA ** B % P
+if key1 == key2:
+    print(f"共享密钥是：{key1}")
+else:
+    print(key1)
+    print(key2)
