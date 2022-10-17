@@ -29,13 +29,9 @@ for i in range(2, P):
             break
     if t:
         g.append(i)
-
 print(g)
 while True:
     G = int(input("请输入选择的G："))
     if G in g:
         break
     print("所选择的G不在可用列表中，请重新选择：")
-
-
-
