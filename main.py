@@ -1,4 +1,5 @@
 from math import floor, sqrt
+import random
 
 
 def isPrime(p):
@@ -80,16 +81,13 @@ if S == 1:
 
 # 双人交流助手
 elif S == 2:
-    # 计算公开数
-    while True:
-        A = int(input("请输入一个小于P的正整数："))
-        if A < P and A > 1:
-            break
-        print("输入不合法，请重新输入")
+    # 选择随机数
+    A = random.randint(2, P)
+    print(f"取得随机数为：{A}")
 
     # 计算中间结果
     AA = G ** A % P
-    print(f"计算得 {AA}，请将这个公开数告知对方")
+    print(f"计算得【{AA}】，请将这个公开数告知对方")
 
     # 计算共享密钥
     while True:
@@ -98,5 +96,50 @@ elif S == 2:
             break
         print("输入不合法，请重新输入")
     key = BB ** A % P
+    print("共享密钥计算完成！")
     print(f"共享密钥是：{key}")
+
+    # 进行加密和解密消息
+    while(input("是否继续通信？（y/n）") != 'n'):
+        mission = input('加密(e) / 解密(d) / 退出(q)\n')
+        while True:
+            # 加密信息
+            if mission == 'e':
+                text = input("输入需要加密的消息：\n")
+                secret = ''
+                for i in text:
+                    _c = str(ord(i))
+                    while len(_c) < 5:
+                        _c = '0' + _c
+                    secret += _c
+                secret = '1' + secret
+                KEY = key
+                k = 1
+                while KEY < int(secret):
+                    KEY *= key
+                    k += 1
+                secret = str(len(str(k))) + str(k) + str(int(secret) ^ KEY)
+                print('\n加密完成\n\n', secret, sep='')
+                print()
+
+            # 解密信息
+            elif mission == 'd':
+                secret = input("输入需要解密的消息：\n")
+                nk = int(secret[0])
+                k = int(secret[1: nk+1])
+                KEY = key ** k
+                secret = int(secret[nk+1: ])
+                t = str(secret ^ KEY)[1: ]
+                text = ''
+                for i in range(int(len(t)/5)):
+                    text += chr(int(t[5*i: 5*i+5]))
+                print("\n解密完成：\n\n", text, sep='')
+                print()
+
+            elif mission == 'q':
+                input('Good Luck!')
+                quit()
+            mission = input('加密(e) / 解密(d) / 退出(q)\n')
+    
+    input('Good Luck!')
 
