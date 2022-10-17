@@ -1,5 +1,5 @@
 from math import floor, sqrt
-import random
+from random import randint
 
 
 def isPrime(p):
@@ -22,36 +22,33 @@ while True:
     print("输入错误请重新输入")
 
 
-# 获取P
-while(True):
-    P = int(input("请输入P值："))
-    if isPrime(P):
-        break
-    print('输入的不是素数，请重新输入')
-
-
-# 获取P的原根G
-g = []
-for i in range(2, P):
-    t = True
-    for j in range(2, P-1):
-        if i ** j % P == 1:
-            t = False
-            break
-    if t:
-        g.append(i)
-print(g)
-
-while True:
-    G = int(input("请输入选择的G："))
-    if G in g:
-        break
-    print("所选择的G不在可用列表中，请重新选择")
-print(f"G = {G}, P = {P}")
-
-
 # 单机测试版
 if S == 1:
+    # 获取P
+    while(True):
+        P = int(input("请输入P值："))
+        if isPrime(P):
+            break
+        print('输入的不是素数，请重新输入')
+
+    # 获取P的原根G
+    g = []
+    for i in range(2, P):
+        t = True
+        for j in range(2, P-1):
+            if i ** j % P == 1:
+                t = False
+                break
+        if t:
+            g.append(i)
+    print(g)
+    while True:
+        G = int(input("请输入选择的G："))
+        if G in g:
+            break
+        print("所选择的G不在可用列表中，请重新选择")
+    print(f"G = {G}, P = {P}")
+
     # 获得A、B
     while True:
         A = int(input("请输入你的A："))
@@ -81,13 +78,43 @@ if S == 1:
 
 # 双人交流助手
 elif S == 2:
+    # 获取P
+    while(True):
+        P = int(input("请输入P值："))
+        if isPrime(P):
+            break
+        print('输入的不是素数，请重新输入')
+
+    # 获取P的原根G
+    t = True
+    while t:
+        t = False
+        G = input("请输入已选择的G，或按回车自动选择：")
+        if G == '':
+            t2 = True
+            while t2:
+                t2 = False
+                G = randint(2, P-1)
+                for i in range(2, P-1):
+                    if int(G) ** i % P == 1:
+                        t2 = True
+                        break
+        G = int(G)
+        for i in range(2, P-1):
+            if int(G) ** i % P == 1:
+                print("该G不可用，请重新选择")
+                t = True
+                break
+    print(f"\nG = 【{G}】, P = 【{P}】\n")
+  
+    
     # 选择随机数
-    A = random.randint(2, P)
-    print(f"取得随机数为：{A}")
+    A = randint(2, P)
+    # print(f"取得随机数为：{A}")
 
     # 计算中间结果
     AA = G ** A % P
-    print(f"计算得【{AA}】，请将这个公开数告知对方")
+    print(f"计算得【{AA}】，请将这个公开数告知对方\n")
 
     # 计算共享密钥
     while True:
