@@ -1,2 +1,4 @@
 pyinstaller
 .DS_Store
+get.ps1
+main.exe
