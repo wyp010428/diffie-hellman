@@ -16,7 +16,7 @@ def isPrime(p):
 
 # 选择软件状态
 while True:
-    S = int(input("单机测试版：1，对话模式：2\n请输入："))
+    S = int(input("单机测试版：1 ｜ 对话模式：2\n请输入："))
     if S == 1 or S == 2:
         break
     print("输入错误请重新输入")
