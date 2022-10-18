@@ -75,7 +75,7 @@ if S == 1:
         print('生成会话密钥不同，检查错误')
         print(key1)
         print(key2)
-    
+
     input()
 
 
@@ -96,11 +96,12 @@ elif S == 2:
         ]
         G, P = GPpairs[choose-1]
         # print(f"\nG = 【{G}】, P = 【{P}】\n")
-        
+
         # 选择随机数
         A = input('填写私钥(大小控制在10万内)，或回车自动生成新私钥：')
         if A == '':
-            choose = int(input('\n请输入加密等级：\n1. 极速\n2. 较快\n3. 较安全\n4. 很安全\n5. 特别安全(非常耗时)\n100. 2030年前世界范围内安全\n'))
+            choose = int(input(
+                '\n请输入加密等级：\n1. 极速\n2. 较快\n3. 较安全\n4. 很安全\n5. 特别安全(非常耗时)\n100. 2030年前世界范围内安全\n'))
             A = randint(10**choose, 10**(choose+1))
         A = int(A)
         print(f"您的私钥为：{A}，请不要透露")
