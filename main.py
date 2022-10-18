@@ -51,12 +51,12 @@ if S == 1:
 
     # 获得A、B
     while True:
-        A = int(input("请输入你的A："))
+        A = int(input("请输入你的私钥1："))
         if A < P and A > 1:
             break
         print("输入不合法，请重新输入")
     while True:
-        B = int(input("请输入你的B："))
+        B = int(input("请输入你的私钥2："))
         if B < P and B > 1:
             break
         print("输入不合法，请重新输入")
@@ -64,16 +64,18 @@ if S == 1:
     # 计算AA，BB
     AA = G ** A % P
     BB = G ** B % P
-    print(f"计算得AA = {AA}，BB = {BB}")
+    print(f"\n计算得公钥1 = {AA}，公钥2 = {BB}")
 
     # 计算共享密钥
     key1 = BB ** A % P
     key2 = AA ** B % P
     if key1 == key2:
-        print(f"共享密钥是：{key1}")
+        print(f"会话密钥是：{key1}")
     else:
+        print('生成会话密钥不同，检查错误')
         print(key1)
         print(key2)
+    input()
 
 
 # 对话模式
